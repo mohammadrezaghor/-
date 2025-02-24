@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه ترقه</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+        }
+        .product-card {
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">فروشگاه آنلاین ترقه</h1>
+
+        <!-- نمایش محصولات -->
+        <div class="row">
+            <!-- محصول 1 -->
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="product1.jpg" alt="ترقه 1">
+                    <h5>ترقه فشفشه‌ای</h5>
+                    <p>قیمت: 50,000 تومان</p>
+                    <button class="btn btn-primary">اضافه به سبد خرید</button>
+                </div>
+            </div>
+            <!-- محصول 2 -->
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="product2.jpg" alt="ترقه 2">
+                    <h5>ترقه انفجاری</h5>
+                    <p>قیمت: 70,000 تومان</p>
+                    <button class="btn btn-primary">اضافه به سبد خرید</button>
+                </div>
+            </div>
+            <!-- محصول 3 -->
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="product3.jpg" alt="ترقه 3">
+                    <h5>ترقه دستی</h5>
+                    <p>قیمت: 30,000 تومان</p>
+                    <button class="btn btn-primary">اضافه به سبد خرید</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- سبد خرید -->
+        <div class="mt-4">
+            <h3>سبد خرید</h3>
+            <ul id="cart-items" class="list-group">
+                <!-- آیتم‌های سبد خرید اینجا نمایش داده می‌شوند -->
+            </ul>
+            <button class="btn btn-success mt-3" onclick="checkout()">پرداخت</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(product) {
+            cart.push(product);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach((product, index) => {
+                const li = document.createElement('li');
+                li.classList.add('list-group-item');
+                li.textContent = product.name + ' - ' + product.price + ' تومان';
+                cartItems.appendChild(li);
+            });
+        }
+
+        function checkout() {
+            alert('پرداخت انجام شد.');
+        }
+
+        // اضافه کردن محصولات به سبد خرید
+        document.querySelectorAll('.btn-primary').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const product = {
+                    name: button.previousElementSibling.previousElementSibling.textContent,
+                    price: button.previousElementSibling.textContent
+                };
+                addToCart(product);
+            });
+        });
+    </script>
+</body>
+</html>
